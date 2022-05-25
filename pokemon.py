@@ -90,5 +90,5 @@ class Pokemon:
             time.sleep(3)
 
 if __name__ == '__main__':
-    Skrelp = Pokemon('Skrelp, 690, water, 0.8, 7.30')
-    Masquerain = Pokemon('Masquerain, 284, bug, 0.30, 3.5')
+    Skrelp = Pokemon('Skrelp', '690', 'water', '0.8', '7.30')
+    Masquerain = Pokemon('Masquerain', '284', 'bug', '0.30', '3.5')
