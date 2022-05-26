@@ -5,9 +5,10 @@ import time
 
 
 class Pokemon:
+    round = 0
+
     def __init__(self, name, number, type, height, weight):
         """ Defines pokemon class """
-
 
         self.__name = name
         self.__number = number
@@ -24,7 +25,10 @@ class Pokemon:
 
     @name.setter
     def name(self, value):
-        self.__name
+        if type(value) is not str:
+            raise TypeError("Name should be letters")
+        else:
+            self.__name = value
 
     @property
     def number(self):
@@ -33,7 +37,10 @@ class Pokemon:
 
     @number.setter
     def number(self, value):
-        self.__number
+        if type(value) is not int:
+            raise TypeError("Number must be an integer")
+        else:
+            self.__number = value
 
     @property
     def type(self):
@@ -42,7 +49,11 @@ class Pokemon:
 
     @type.setter
     def type(self, value):
-        self.__type
+        if type(value) is not str:
+            raise TypeError("Pokemon type must be watger, earth, fire, \
+                 wind or bug")
+        else:
+            self.__type = value
 
     @property
     def weight(self):
@@ -51,7 +62,10 @@ class Pokemon:
 
     @weight.setter
     def weight(self, value):
-        self.__weight
+        if type(value) is not (int or float):
+            raise TypeError("Weight must be an integer or a float")
+        else:
+            self.__weight = value
 
     @property
     def height(self):
@@ -60,7 +74,10 @@ class Pokemon:
 
     @height.setter
     def height(self, value):
-        self.__height
+        if type(value) is not (int or float):
+            raise TypeError("Height must be an integer or a float")
+        else:
+            self.__height = value
 
     @property
     def attack(self):
@@ -69,26 +86,32 @@ class Pokemon:
 
     @attack.setter
     def attack(self, value):
-        self.__attack
+        self.__attack = value
 
     def combat(self, opponent):
-        while (self.HP > 0) and (opponent.HP > 0):
-            print(f"{self.name}, hit points are {self.HP}")
-            print(f"{opponent.name}, hit points are {opponent.HP}")
+        while (self.__HP > 0) and (opponent.__HP > 0):
+            print("-------ROUND {:d}------".format(Pokemon.round), end="\n")
+            print(f"{self.name}, hit points are {self.__HP} &", end=" ")
+            print(f"{opponent.name}, hit points are {opponent.__HP}")
             time.sleep(2)
-            print(f"{self.name} go!")
-            opponent.HP -= self.attack
-            if opponent.HP <= 0:
+            print(f"{self.name} go!", end=" ")
+            opponent.__HP -= self.attack
+            if opponent.__HP <= 0:
                 print(f"{opponent.name} fainted!")
                 break
             else:
                 print(f"{opponent.name} go!")
-                self.HP -= opponent.attack
-                if self.HP <= 0:
+                self.__HP -= opponent.attack
+                if self.__HP <= 0:
                     print(f"{self.name} fainted!")
-                    break               
+                    break
+            Pokemon.round += 1
             time.sleep(3)
+
 
 if __name__ == "__main__":
     Skrelp = Pokemon('Skrelp', '690', 'water', '0.8', '7.30')
     Masquerain = Pokemon('Masquerain', '284', 'bug', '0.30', '3.5')
+
+    # Combat
+    Skrelp.combat(Masquerain)
